@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game 1</title>
+    <link rel="stylesheet" href="game1.css">
+    <script src="game1.js" defer></script>
+</head>
+<body>
+    <h1>Memorize the Flag</h1>
+    <div class="player-name" id="player-name"></div>
+    <div class="game">
+        <div class="controls">
+            <div class="best-stats">
+                <div>Fastest Time: <span class="fastest-time">N/A</span> sec</div>
+                <div>Least Moves: <span class="least-moves">N/A</span></div>
+            </div>
+            <button class="start">Start</button>
+            <button class="pause">Pause</button>
+            <div class="stats">
+                <div class="moves">0 moves</div>
+                <div class="timer">Time: 0 sec</div>
+            </div>
+        </div>
+        <div class="board-container">
+            <div class="board" data-dimension="4"></div>
+            <div class="win">Congratulations!</div>
+            <!-- Exit button -->
+            <button class="exit-button">Exit</button>
+        </div>
+    </div>
+
+    <!-- Popup Modal -->
+    <div class="popup-overlay" id="popup-overlay">
+        <div class="popup">
+            <p id="thank-you-message"></p>
+            <button class="confirm-exit">OK</button>
+        </div>
+    </div>
+
+    <script>
+        // Function to get URL parameters
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                name: params.get('name')
+            };
+        }
+
+        window.onload = function() {
+            const { name } = getQueryParams();
+            if (name) {
+                const playerNameElement = document.createElement('p');
+                playerNameElement.textContent = `Player : ${name}`;
+                document.body.insertBefore(playerNameElement, document.querySelector('.game'));
+
+                // Save player name to localStorage
+                localStorage.setItem('playerName', name);
+            }
+        };
+    </script>
+</body>
+</html>

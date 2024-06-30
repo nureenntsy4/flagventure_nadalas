@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Playwrite+AU+TAS:wght@100..400&display=swap');
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Nunito", sans-serif;
+}
+
+html, body {
+  background-color: #0B6E4F;
+  background-image: url('images/gameback.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.container {
+  width: 90%;
+  max-width: 37.5em;
+  background-color: #ffffff;
+  padding: 3em 0.5em;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  border-radius: 0.8em;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
+}
+
+.game-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1em;
+}
+
+#timer,
+#score {
+  font-size: 1.2em;
+  font-weight: 600;
+  color: #010c39;
+  padding: 0px 10px;
+}
+
+h3 {
+  text-align: center;
+  width: 60%;
+  margin: 0 auto 2em auto;
+  font-size: 1.2em;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  line-height: 1.8em;
+  color: #010c39;
+}
+
+.draggable-objects,
+.drop-points {
+  display: flex;
+  justify-content: space-around;
+  padding: 2em;
+}
+
+.draggable-image {
+  width: 8em;
+  cursor: move;
+}
+
+img {
+  width: 8em;
+  filter: drop-shadow(0 0.3em 0.9em rgba(0, 0, 0, 0.25));
+}
+
+.countries {
+  width: 10em;
+  height: 8em;
+  display: grid;
+  place-items: center;
+  border: 0.25em dashed #010c39;
+  border-radius: 0.8em;
+}
+
+.dropped {
+  padding: 0;
+  background-color: #e5ffc8;
+}
+
+.controls-container {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  background-color: background-image: url('images/gameback.jpg');
+  background-size: auto;
+  background-position: center;
+  background-repeat: no-repeat;;
+  flex-direction: column;
+  top: 0;
+}
+
+.controls-container button {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 18pt;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  color: #FFF;
+  background-color: #0B6E4F;
+  cursor: pointer;
+}
+
+.controls-container p {
+  color: #ffffff;
+  font-size: 2em;
+  margin-bottom: 1em;
+}
+
+.hide {
+  display: none;
+}
+
+/* Red flash effect for wrong drop */
+@keyframes red-flash {
+  0% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: red;
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+.wrong-drop {
+  background-color: #ffcccc; /* Light red background */
+  border-color: red; /* Red border */
+  transition: background-color 0.5s ease;
+}
+
+/* Add styles for pause-resume and exit containers */
+.pause-resume-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  margin-top: -50px;
+}
+
+.exit-container {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 1em;
+  margin-right: 250px;
+  margin-bottom: 30px;
+}
+
+#pause-resume {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 18pt;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  color: #FFF;
+  background-color: #0B6E4F;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+}
+
+#exit {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 18pt;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  color: #FFF;
+  background-color: #FF6961;
+  cursor: pointer;
+}

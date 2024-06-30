@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drag & Drop</title>
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="game2.css" />
+	<style>
+	body {
+	  background-image: url('images/gameback.jpg');
+	  background-size: auto;
+	  background-position: center;
+	  background-repeat: no-repeat;
+	}
+	</style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="game-info">
+        <div id="timer">Time: 200</div>
+        <div id="score">Score: 0</div>
+		<div class="pause-resume-container">
+		  <button id="pause-resume">Pause</button>
+		</div>
+      </div>
+	
+      <h3>Drag & Drop The Flags Over Their Respective Country Names</h3>
+      <div class="draggable-objects"></div>
+      <div class="drop-points"></div>
+    </div>
+    <div class="controls-container">
+      <p id="result"></p>
+      <button id="start">Start Game</button>
+    </div>
+	<div class="exit-container">
+		<button id="exit">Exit</button>
+    </div>
+    <!-- Script -->
+    <script src="game2.js"></script>
+  </body>
+</html>
