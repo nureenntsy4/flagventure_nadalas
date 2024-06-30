@@ -23,7 +23,7 @@ let moveElement = false;
 
 let count = 0;
 let score = 0;
-let time = 120; // Total time for the entire game (120 seconds)
+let time = 120; // Total time for the entire game (200 seconds)
 let timer;
 let round = 1; // Track the current round
 let gamePaused = false; // Flag to track game paused state
