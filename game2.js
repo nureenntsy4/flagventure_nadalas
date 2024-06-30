@@ -23,7 +23,7 @@ let moveElement = false;
 
 let count = 0;
 let score = 0;
-let time = 200; // Total time for the entire game (200 seconds)
+let time = 120; // Total time for the entire game (120 seconds)
 let timer;
 let round = 1; // Track the current round
 let gamePaused = false; // Flag to track game paused state
@@ -53,6 +53,8 @@ const stopGame = () => {
   scoreDisplay.textContent = Score: ${score};
   result.innerHTML = Game Over! Your final score is ${score}.<br>Click "Start Game" to play again.;
   result.classList.remove("hide"); // Ensure the result element is visible
+  result.style.color = "black"; // Set text color to black
+  result.style.fontWeight = "bold"; // Set text to bold
 };
 
 // Timer Function
@@ -249,7 +251,7 @@ const startRound = () => {
 // Start Game
 startButton.addEventListener("click", () => {
   round = 1; // Reset round count
-  time = 200; // Reset time
+  time = 120; // Reset time
   score = 0; // Reset score
   scoreDisplay.textContent = Score: ${score};
   gamePaused = false; // Ensure game is not paused on start
