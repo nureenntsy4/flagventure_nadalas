@@ -8,6 +8,7 @@ const dragContainer = document.querySelector(".draggable-objects");
 const dropContainer = document.querySelector(".drop-points");
 const timerDisplay = document.getElementById("timer");
 const scoreDisplay = document.getElementById("score");
+
 const data = [
   "malaysia", "indonesia", "thailand", "vietnam", "laos", "china", "japan",
   "korea", "bangladesh", "pakistan", "india", "myanmar", "singapore", "brunei",
@@ -49,7 +50,9 @@ const stopGame = () => {
   clearInterval(timer);
   controls.classList.remove("hide");
   startButton.classList.remove("hide");
-  scoreDisplay.textContent = `Score: ${score}`;
+  scoreDisplay.textContent = Score: ${score};
+  result.innerHTML = Game Over! Your final score is ${score}.<br>Click "Start Game" to play again.;
+  result.classList.remove("hide"); // Ensure the result element is visible
 };
 
 // Timer Function
@@ -58,11 +61,11 @@ const startTimer = () => {
   timer = setInterval(() => {
     if (!gamePaused) {
       time--;
-      timerDisplay.textContent = `Time: ${time}`;
+      timerDisplay.textContent = Time: ${time};
 
       if (time <= 0) {
         clearInterval(timer);
-        result.textContent = `Game Over! Your final score is ${score}`;
+        result.textContent = Game Over! Your final score is ${score};
         stopGame();
       } else if (time % 5 === 0) {
         timerDisplay.classList.add("red-flash");
@@ -113,7 +116,7 @@ const drop = (e) => {
 
   if (isTouchDevice()) {
     moveElement = false;
-    const currentDrop = document.querySelector(`div[data-id='${e.target.id}']`);
+    const currentDrop = document.querySelector(div[data-id='${e.target.id}']);
     const currentDropBound = currentDrop.getBoundingClientRect();
 
     if (
@@ -125,7 +128,7 @@ const drop = (e) => {
       correctDrop = true;
       currentDrop.classList.add("dropped");
       currentElement.classList.add("hide");
-      currentDrop.innerHTML = `<img src="images/${currentElement.id}.png">`;
+      currentDrop.innerHTML = <img src="images/${currentElement.id}.png">;
     } else {
       e.target.classList.add("wrong-drop");
       setTimeout(() => {
@@ -142,9 +145,9 @@ const drop = (e) => {
       e.target.classList.add("dropped");
       document.getElementById(draggedElementData).classList.add("hide");
       document.getElementById(draggedElementData).setAttribute("draggable", "false");
-      e.target.innerHTML = `<img src="images/${draggedElementData}.png">`;
+      e.target.innerHTML = <img src="images/${draggedElementData}.png">;
       score += 10; // Increase score on correct drop
-      scoreDisplay.textContent = `Score: ${score}`;
+      scoreDisplay.textContent = Score: ${score};
     } else {
       e.target.classList.add("wrong-drop");
       setTimeout(() => {
@@ -161,11 +164,11 @@ const drop = (e) => {
   // Check if all drops are correct
   if (count === 3) {
     if (round === 7 || time <= 0) { // Adjusted to end game on round 7 or time out
-      result.innerText = `Game Over! Your final score is ${score}`;
+      result.innerText = Game Over! Your final score is ${score};
       stopGame();
     } else {
       round++;
-      result.innerText = `Round ${round} completed! Your score is ${score}`;
+      result.innerText = Round ${round} completed! Your score is ${score};
       setTimeout(() => {
         result.innerText = '';
         startRound();
@@ -178,7 +181,7 @@ const drop = (e) => {
 const penalizeTime = () => {
   time -= 5; // Penalize 5 seconds for each wrong drop
   if (time < 0) time = 0; // Ensure time doesn't go negative
-  timerDisplay.textContent = `Time: ${time}`;
+  timerDisplay.textContent = Time: ${time};
 };
 
 // Creates flags and countries
@@ -203,7 +206,7 @@ const creator = () => {
     if (isTouchDevice()) {
       flagDiv.style.position = "absolute";
     }
-    flagDiv.innerHTML = `<img src="images/${i}.png" id="${i}">`;
+    flagDiv.innerHTML = <img src="images/${i}.png" id="${i}">;
     dragContainer.appendChild(flagDiv);
   }
 
@@ -239,7 +242,7 @@ const startRound = () => {
   });
 
   result.textContent = '';
-  timerDisplay.textContent = `Time: ${time}`;
+  timerDisplay.textContent = Time: ${time};
   startTimer();
 };
 
@@ -248,7 +251,7 @@ startButton.addEventListener("click", () => {
   round = 1; // Reset round count
   time = 200; // Reset time
   score = 0; // Reset score
-  scoreDisplay.textContent = `Score: ${score}`;
+  scoreDisplay.textContent = Score: ${score};
   gamePaused = false; // Ensure game is not paused on start
   startRound();
 });
