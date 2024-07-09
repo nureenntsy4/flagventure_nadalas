@@ -31,6 +31,7 @@
             color: #0B6E4F;
             margin: 20px 0;
             text-align: center;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
         }
 
         p {
@@ -52,6 +53,7 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 2s ease-in-out;
         }
 
         .input-field {
@@ -69,7 +71,7 @@
         }
 
         .buttons {
-            display: flex;
+            display: none;
             gap: 20px;
             margin-top: 20px;
         }
@@ -84,6 +86,29 @@
             font-family: "Noto Serif", serif;
             font-size: 18pt;
             font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #08613D;
+        }
+
+        .sound-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+		
+		.sound-button:hover{
+			background-color: #fff;
+		}
+
+        .sound-button img {
+            width: 40px;
+            height: 40px;
         }
 
         .welcome-message {
@@ -94,19 +119,31 @@
             margin: 10px 0;
             display: none;
         }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
     </style>
     <title>Flagventure Home</title>
 </head>
 <body>
+	<audio id="background-music" loop>
+        <source src="audio/backsound.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
     <div class="home-container">
+        <button class="sound-button" onclick="toggleSound()">
+            <img id="sound-icon" src="image/sound-on.png" alt="Sound On/Off">
+        </button>
         <h1>Flagventure of Asia</h1>
         <p>Explore Asia with Us</p>
-        <div class="input-field">
+        <div id="input-field" class="input-field">
             <label for="name">Enter your name:</label>
             <input type="text" id="name" name="name" onkeypress="checkEnter(event)">
-            <p id="welcome-message" class="welcome-message"></p>
         </div>
-        <div class="buttons">
+        <p id="welcome-message" class="welcome-message"></p>
+        <div id="game-buttons" class="buttons">
             <button onclick="startGame(1)">Memorize The Flag</button>
             <button onclick="startGame(2)">Drag And Drop</button>
         </div>
@@ -121,30 +158,63 @@
         function updateWelcomeMessage() {
             const playerName = document.getElementById('name').value;
             const welcomeMessage = document.getElementById('welcome-message');
+            const gameButtons = document.getElementById('game-buttons');
+            const inputField = document.getElementById('input-field');
             if (playerName) {
                 welcomeMessage.innerHTML = `Welcome, ${playerName}!<br><img src="image/mag.png" alt="icon" style="width: 50px; height: 50px;"> Choose a game <img src="image/gl.png" alt="icon" style="width: 50px; height: 50px;">`;
                 welcomeMessage.style.display = 'block';
+                gameButtons.style.display = 'flex';
+                inputField.style.display = 'none';
             } else {
                 welcomeMessage.textContent = '';
                 welcomeMessage.style.display = 'none';
+                gameButtons.style.display = 'none';
+                inputField.style.display = 'flex';
             }
         }
 
         function startGame(gameNumber) {
-		const playerName = document.getElementById('name').value;
-		if (playerName) {
-			if (gameNumber === 1) {
-            window.location.href = `game1.html?name=${encodeURIComponent(playerName)}`;
-			} else if (gameNumber === 2) {
-            window.location.href = `game2.html?name=${encodeURIComponent(playerName)}`;
-			} else {
-            alert('Invalid game number.');
-			}
-		} else {
-        alert('Please enter your name.');
-    }
-}
+            const playerName = document.getElementById('name').value;
+            if (playerName) {
+                if (gameNumber === 1) {
+                    window.location.href = `game1.html?name=${encodeURIComponent(playerName)}`;
+                } else if (gameNumber === 2) {
+                    window.location.href = `game2.html?name=${encodeURIComponent(playerName)}`;
+                } else {
+                    alert('Invalid game number.');
+                }
+            } else {
+                alert('Please enter your name.');
+            }
+        }
 
+        function toggleSound() {
+            const soundIcon = document.getElementById('sound-icon');
+			const backgroundMusic = document.getElementById('background-music');
+            const isSoundOn = localStorage.getItem('sound') === 'on';
+            if (isSoundOn) {
+                soundIcon.src = 'image/sound-off.png';
+				backgroundMusic.pause();
+                localStorage.setItem('sound', 'off');
+            } else {
+                soundIcon.src = 'image/sound-on.png';
+				backgroundMusic.play();
+                localStorage.setItem('sound', 'on');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const isSoundOn = localStorage.getItem('sound') === 'on';
+            const soundIcon = document.getElementById('sound-icon');
+			const backgroundMusic = document.getElementById('background-music');
+			
+            if (isSoundOn) {
+                soundIcon.src = 'image/sound-on.png';
+				backgroundMusic.play();
+            } else {
+                soundIcon.src = 'image/sound-off.png';
+            }
+        });
     </script>
 </body>
 </html>
